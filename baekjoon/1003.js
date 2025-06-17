@@ -1,22 +1,18 @@
 function solution(input) {
-  const [N, M] = input[0].split(" ").map(Number);
-  const set = new Set();
   const result = [];
-  let findMode = false;
-  for (let i = 1; i < input.length; i++) {
-    const name = input[i];
-    if (!findMode) {
-      set.add(name);
-    } else {
-      if (set.has(name)) result.push(name);
-    }
-
-    if (i === N) findMode = true;
+  const dp = {};
+  dp[0] = { 0: 1, 1: 0 };
+  dp[1] = { 0: 0, 1: 1 };
+  for (let i = 2; i <= 40; i++) {
+    dp[i] = { 0: dp[i - 1][0] + dp[i - 2][0], 1: dp[i - 1][1] + dp[i - 2][1] };
   }
 
+  for (let i = 1; i < input.length; i++) {
+    const _i = input[i] * 1;
+    result.push(`${dp[_i][0]} ${dp[_i][1]}`);
+  }
   // return answer
-  console.log(result.length);
-  result.sort().forEach((n) => console.log(n));
+  result.forEach((e) => console.log(e));
 }
 
 /* readline Module */

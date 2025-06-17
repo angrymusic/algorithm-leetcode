@@ -1,22 +1,14 @@
 function solution(input) {
-  const [N, M] = input[0].split(" ").map(Number);
-  const set = new Set();
-  const result = [];
-  let findMode = false;
-  for (let i = 1; i < input.length; i++) {
-    const name = input[i];
-    if (!findMode) {
-      set.add(name);
-    } else {
-      if (set.has(name)) result.push(name);
-    }
-
-    if (i === N) findMode = true;
-  }
-
+  const people = input[1].split(" ").map(Number);
+  people.sort((a, b) => a - b);
+  let result = 0;
+  let sum = 0;
+  people.forEach((e) => {
+    result = result + e;
+    sum += result;
+  });
   // return answer
-  console.log(result.length);
-  result.sort().forEach((n) => console.log(n));
+  console.log(sum);
 }
 
 /* readline Module */

@@ -1,22 +1,18 @@
 function solution(input) {
   const [N, M] = input[0].split(" ").map(Number);
-  const set = new Set();
+  const map = new Map();
   const result = [];
   let findMode = false;
   for (let i = 1; i < input.length; i++) {
-    const name = input[i];
-    if (!findMode) {
-      set.add(name);
-    } else {
-      if (set.has(name)) result.push(name);
-    }
+    const [site, pw] = input[i].split(" ");
+    if (!findMode) map.set(site, pw);
+    else result.push(map.get(site));
 
     if (i === N) findMode = true;
   }
 
   // return answer
-  console.log(result.length);
-  result.sort().forEach((n) => console.log(n));
+  result.forEach((e) => console.log(e));
 }
 
 /* readline Module */

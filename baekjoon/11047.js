@@ -1,22 +1,21 @@
 function solution(input) {
   const [N, M] = input[0].split(" ").map(Number);
-  const set = new Set();
-  const result = [];
-  let findMode = false;
+  let remainValue = M;
+  const coins = [];
+  let result = 0;
   for (let i = 1; i < input.length; i++) {
-    const name = input[i];
-    if (!findMode) {
-      set.add(name);
-    } else {
-      if (set.has(name)) result.push(name);
-    }
-
-    if (i === N) findMode = true;
+    const coinValue = input[i] * 1;
+    if (coinValue > M) break;
+    coins.push(coinValue);
   }
-
+  while (coins.length > 0) {
+    const popedCoin = coins.pop();
+    result += Math.floor(remainValue / popedCoin);
+    remainValue = remainValue % popedCoin;
+    if (remainValue === 0) break;
+  }
   // return answer
-  console.log(result.length);
-  result.sort().forEach((n) => console.log(n));
+  console.log(result);
 }
 
 /* readline Module */
